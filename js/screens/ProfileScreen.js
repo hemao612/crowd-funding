@@ -1,11 +1,11 @@
 import React from "react";
 import {Platform, Text} from "react-native";
 
-export default class HomeScreen extends React.Component {
+export default class ProfileScreen extends React.Component {
 
   static route = {
     navigationBar: {
-      title: 'Home',
+      title: 'Profile',
       ...Platform.select({
         ios: {
         },
@@ -14,6 +14,6 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
-    return <Text>This Home Screen</Text>
+    return <Text>This Profile Screen</Text>
   }
 }
