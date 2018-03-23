@@ -5,6 +5,7 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { NavigationProvider, StackNavigation } from '@expo/ex-navigation';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import I18n from './js/i18n/i18n';
 
 import customNavigationContext from './js/navigation/customNavigationContext';
 
@@ -18,7 +19,7 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-    this._initializeStateAsync();
+    this._initializeStateAsync().then();
   }
 
   _initializeStateAsync = async () => {
@@ -28,6 +29,8 @@ export default class App extends React.Component {
       } else {
         await Promise.all([Font.loadAsync(Ionicons.font), Font.loadAsync(MaterialIcons.font)]);
       }
+
+      await I18n.initAsync();
     } catch (e) {
       // ..
     } finally {
