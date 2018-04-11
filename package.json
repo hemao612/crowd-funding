@@ -4,11 +4,13 @@
   "dependencies": {
     "@expo/ex-navigation": "^4.2.0",
     "@expo/react-native-action-sheet": "^1.0.2",
+    "@expo/react-native-touchable-native-feedback-safe": "latest",
     "@expo/vector-icons": "latest",
     "expo": "^25.0.0",
+    "i18n-js": "latest",
     "lodash": "latest",
+    "parse": "^1.11.1",
     "react": "16.2.0",
-    "react-native": "0.52.x",
-    "i18n-js": "latest"
+    "react-native": "0.52.x"
   }
 }

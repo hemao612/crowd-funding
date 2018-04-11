@@ -1,13 +1,15 @@
 
 import { AppLoading, Asset, Font } from 'expo';
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, AsyncStorage } from 'react-native';
 import { NavigationProvider, StackNavigation } from '@expo/ex-navigation';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import Parse from 'parse/react-native';
 import I18n from './js/i18n/i18n';
 
 import customNavigationContext from './js/navigation/customNavigationContext';
+import ParseConstants from "./js/parse/ParseConstants";
 
 function cacheImages(images) {
   return images.map(image => Asset.fromModule(image).downloadAsync());
@@ -30,12 +32,23 @@ export default class App extends React.Component {
         await Promise.all([Font.loadAsync(Ionicons.font), Font.loadAsync(MaterialIcons.font)]);
       }
 
+      // Init I18n
       await I18n.initAsync();
+
+      await this._initializeParse();
+
     } catch (e) {
       // ..
     } finally {
       this.setState({ isReady: true });
     }
+  };
+
+  _initializeParse = async () => {
+    Parse.setAsyncStorage(AsyncStorage);
+    Parse.initialize(ParseConstants.appId);
+    Parse.serverURL = ParseConstants.serverURL;
+    Parse.User.enableUnsafeCurrentUser();
   };
 
   render() {
